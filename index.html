@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дизайн-система «Помощник поддержки» — демо для урока 6.4</title>
+<!--
+  ДЕМО ДИЗАЙН-СИСТЕМЫ (урок 6.4).
+  Эта страница — «библиотека компонентов» продукта. Отдайте её агенту вместе
+  с промптом прототипа: он обязан использовать эти переменные и компоненты,
+  тогда все экраны продукта (и презентация в 6.6) будут в одном стиле.
+-->
+<style>
+  /* ── 1. Константы бренда: меняете здесь — меняется весь продукт ── */
+  :root{
+    --brand:        #ff5533;   /* акцент: действия, ссылки, фокус */
+    --brand-dark:   #d63f22;
+    --bg:           #171a21;   /* фон продукта */
+    --panel:        #23262e;   /* карточки и панели */
+    --ink:          #e8e8f0;   /* основной текст */
+    --ink-dim:      rgba(255,255,255,.62);
+    --ok:           #4caf7d;
+    --warn:         #e2b93b;
+    --radius:       10px;
+    --font:         'Inter','Segoe UI',system-ui,sans-serif;
+    --space:        16px;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font);
+       line-height:1.55;padding:calc(var(--space)*2);max-width:960px;margin:0 auto}
+  h1{font-size:1.6rem;margin-bottom:4px}
+  h2{font-size:1.15rem;margin:calc(var(--space)*2) 0 var(--space);color:var(--brand)}
+  p.lead{color:var(--ink-dim)}
+
+  /* ── 2. Компоненты ── */
+  .btn{display:inline-block;padding:10px 20px;border-radius:var(--radius);
+       border:none;font:600 .95rem var(--font);cursor:pointer}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{background:var(--brand-dark)}
+  .btn-ghost{background:transparent;color:var(--brand);border:1px solid var(--brand)}
+
+  .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);
+        border-radius:var(--radius);padding:var(--space);margin-bottom:var(--space)}
+  .card h3{font-size:1rem;margin-bottom:6px}
+  .card p{color:var(--ink-dim);font-size:.9rem}
+
+  .field{display:block;margin-bottom:var(--space)}
+  .field span{display:block;font-size:.8rem;color:var(--ink-dim);margin-bottom:4px}
+  .field input,.field textarea{width:100%;padding:10px 12px;border-radius:var(--radius);
+        border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);
+        color:var(--ink);font:400 .95rem var(--font)}
+  .field input:focus,.field textarea:focus{outline:2px solid var(--brand)}
+
+  .badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.75rem;font-weight:600}
+  .badge-ok{background:rgba(76,175,125,.15);color:var(--ok)}
+  .badge-warn{background:rgba(226,185,59,.15);color:var(--warn)}
+  .badge-soon{background:rgba(255,255,255,.08);color:var(--ink-dim)}
+
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th{color:var(--ink-dim);font-weight:600;text-align:left}
+  th,td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.08)}
+
+  .swatches{display:flex;gap:10px;flex-wrap:wrap}
+  .sw{width:120px;border-radius:var(--radius);overflow:hidden;font-size:.72rem}
+  .sw>div{height:48px}
+  .sw>span{display:block;padding:4px 8px;background:var(--panel);color:var(--ink-dim)}
+</style>
+</head>
+<body>
+  <h1>Дизайн-система «Помощник поддержки»</h1>
+  <p class="lead">Одна страница = бренд + библиотека компонентов. Агент строит продукт только из этого.</p>
+
+  <h2>Палитра</h2>
+  <div class="swatches">
+    <div class="sw"><div style="background:var(--brand)"></div><span>--brand</span></div>
+    <div class="sw"><div style="background:var(--bg);border:1px solid #333"></div><span>--bg</span></div>
+    <div class="sw"><div style="background:var(--panel)"></div><span>--panel</span></div>
+    <div class="sw"><div style="background:var(--ok)"></div><span>--ok</span></div>
+    <div class="sw"><div style="background:var(--warn)"></div><span>--warn</span></div>
+  </div>
+
+  <h2>Кнопки</h2>
+  <p><button class="btn btn-primary">Основное действие</button>
+     <button class="btn btn-ghost">Второстепенное</button></p>
+
+  <h2>Карточка</h2>
+  <div class="card">
+    <h3>Черновик ответа <span class="badge badge-ok">по регламенту §4.2</span></h3>
+    <p>Возврат оформляется в личном кабинете в разделе «Заказы» в течение 14 дней…</p>
+  </div>
+
+  <h2>Форма</h2>
+  <label class="field"><span>Вопрос клиента</span>
+    <textarea rows="2">Как оформить возврат, если заказ уже доставлен?</textarea>
+  </label>
+  <button class="btn btn-primary">Найти ответ</button>
+
+  <h2>Таблица и статусы</h2>
+  <table>
+    <tr><th>Запрос</th><th>Источник</th><th>Статус</th></tr>
+    <tr><td>Возврат после доставки</td><td>Регламент §4.2</td><td><span class="badge badge-ok">готово</span></td></tr>
+    <tr><td>Смена тарифа</td><td>Регламент §7.1</td><td><span class="badge badge-warn">проверить</span></td></tr>
+    <tr><td>Интеграция с CRM</td><td>—</td><td><span class="badge badge-soon">скоро</span></td></tr>
+  </table>
+
+  <h2>Как пользоваться (инструкция для агента)</h2>
+  <div class="card"><p>
+    1) Подключай только переменные из <code>:root</code> — новых цветов и шрифтов не вводить.<br>
+    2) Любой новый экран собирай из компонентов выше; не хватает компонента —
+    добавь его СНАЧАЛА сюда, потом используй.<br>
+    3) Эта же палитра и шрифт задают тему презентации MARP (урок 6.6).
+  </p></div>
+</body>
+</html>
